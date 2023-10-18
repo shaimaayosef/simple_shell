@@ -40,5 +40,6 @@ void executeCommand(char *command, char **argv)
 		dir = strtok(NULL, ":");
 	}
 	free(path_copy);
+	execve("/bin/ls", argv, NULL);
 	perror("Command not found");
 }
