@@ -1,45 +1,24 @@
 #include "main.h"
 
 /**
-* executeCommand - Execute the command using execve if found in PATH
-* @command: The command to execute
-* @argv: An array of arguments
+* *_getline_command - Execute the command using execve if found in PATH
+* return: the command. 
 */
 
-void executeCommand(char *command, char **argv)
+
+char *_getline_command(void)
 {
-	char *path = getenv("PATH");
-	char *path_copy = strdup(path);
-	char *dir = strtok(path_copy, ":");
+	char *lipt = NULL;
+	size_t char_user = 0;
 
-	if (strcmp(command, "env") == 0)
-	{
-		char *env_var;
-		int i;
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "$ ", 2);
 
-		for (i = 0; environ[i] != NULL; i++)
-		{
-			env_var = environ[i];
-			printf("%s\n", env_var);
-		}
-		return;
-	}
-	if (path == NULL)
+	if (getline(&lipt, &char_user, stdin) == -1)
 	{
-		perror("Unable to access PATH");
-		return;
+		free(lipt);
+		return (NULL);
 	}
-	if (path_copy == NULL)
-	{
-		perror("Error:");
-		return;
-	}
-	while (dir != NULL)
-	{
-		searchAndExecute(command, argv, dir);
-		dir = strtok(NULL, ":");
-	}
-	free(path_copy);
-	execve("/bin/ls", argv, NULL);
-	perror("Command not found");
+
+	return (lipt);
 }
