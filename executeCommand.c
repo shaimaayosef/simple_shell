@@ -1,8 +1,8 @@
 #include "main.h"
 
 /**
-* *_getline_command - Execute the command using execve if found in PATH
-* return: the command. 
+*_getline_command - Execute the command using execve if found in PATH
+* Return: The user command.
 */
 
 

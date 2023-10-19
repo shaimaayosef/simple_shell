@@ -1,36 +1,39 @@
 #include "main.h"
 
 /**
-* tokenizeInput - Tokenize the input line
-* @lineptr: The input line to tokenize
-* @argv: A pointer to the array of arguments
-* @num_tokens: A pointer to store the number of tokens
+* tokenize - Tokenize the input line
+* @lineptr: The input line to tokeniz
+* Return: a ptr to arr of ptrs
 */
 
-void tokenizeInput(char *lineptr, char ***argv, int *num_tokens)
+char **tokenize(char *lineptr)
 {
-	const char *delim = " \n";
+	char **user_command = NULL;
+	char *token = NULL;
+	size_t i = 0;
+	int size = 0;
 
-	char *token;
+	if (lineptr == NULL)
+		return (NULL);
 
-	int i = 0;
-
-	token = strtok(lineptr, delim);
-	while (token != NULL)
+	for (i = 0; lineptr[i]; i++)
 	{
-		(*num_tokens)++;
-		token = strtok(NULL, delim);
+		if (lineptr[i] == ' ')
+			size++;
 	}
-	(*num_tokens)++;
+	if ((size + 1) == _strlen(lineptr))
+		return (NULL);
+	user_command = malloc(sizeof(char *) * (size + 2));
+	if (user_command == NULL)
+		return (NULL);
 
-	*argv = malloc(sizeof(char *) * (*num_tokens));
-
-	token = strtok(lineptr, delim);
+	token = strtok(lineptr, " \n\t\r");
 
 	for (i = 0; token != NULL; i++)
 	{
-		(*argv)[i] = strdup(token);
-		token = strtok(NULL, delim);
+		user_command[i] = token;
+		token = strtok(NULL, " \n\t\r");
 	}
-	(*argv)[i] = NULL;
+	user_command[i] = NULL;
+	return (user_command);
 }
