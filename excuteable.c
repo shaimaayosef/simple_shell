@@ -55,8 +55,8 @@ int lsh_help(char **args)
 {
 	int i;
 
-	printf("Oscar Bedat and Andres Henderson\n");
-	printf("If you need help, call 1-800-help\n");
+	printf("ahmed & shaimaa\n");
+	printf("If you need help, contact us on email\n");
 	(void)args;
 	for (i = 0; i < lsh_num_builtins(); i++)
 	{
