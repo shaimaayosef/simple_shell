@@ -1,32 +1,31 @@
 #include "main.h"
-int lsh_cd(char **args);
-int lsh_help(char **args);
-int lsh_exit(char **args);
-int lsh_ctrld(char **args);
 
 /*
- * List of builtin commands, followed by their corresponding functions.
+ * List  func wich used
  */
-char *builtin_str[] = {"cd", "help", "exit", "^D"};
 
-int (*builtin_func[]) (char **) = {&lsh_cd, &lsh_help, &lsh_exit, &lsh_ctrld};
+int lsh_cd(char **args);
+int lsh_hlp(char **args);
+int lsh_ex(char **args);
+int lsh_ctrD(char **args);
+
+char *builtin_st[] = {"cd", "help", "exit", "^D"};
+
+int (*builtin_function[]) (char **) = {&lsh_cd, &lsh_hlp, &lsh_ex, &lsh_ctrD};
 
 /**
- * lsh_num_builtins - size
+ * lsh_num_builtin - size of char
  * Return: size
  */
 
-int lsh_num_builtins(void)
+int lsh_num_builtin(void)
 {
-	return (sizeof(builtin_str) / sizeof(char *));
+	return (sizeof(builtin_st) / sizeof(char *));
 }
 
-/*
- * Builtin function implementations.
-*/
 
 /**
- * lsh_cd - builtin to change dirs
+ * lsh_cd - build to change dir
  * @args: List of args.  args[0] is "cd".  args[1] is the directory.
  * Return: 1 on success
  */
@@ -47,31 +46,31 @@ int lsh_cd(char **args)
 }
 
 /**
- * lsh_help - prints the help for the shell
+ * lsh_hlp - prints the help
  * @args: List of args.  Not examined.
  * Return: Always returns 1, to continue executing.
  */
-int lsh_help(char **args)
+int lsh_hlp(char **args)
 {
 	int i;
 
 	printf("ahmed & shaimaa\n");
 	printf("If you need help, contact us on email\n");
 	(void)args;
-	for (i = 0; i < lsh_num_builtins(); i++)
+	for (i = 0; i < lsh_num_builtin(); i++)
 	{
-		printf("  %s\n", builtin_str[i]);
+		printf("  %s\n", builtin_st[i]);
 	}
 
 	return (1);
 }
 
 /**
- * lsh_exit - builtin to exit the shell
+ * lsh_ex -   exit from the shell
  * @args: List of args.  Not examined.
  * Return: Always returns 0, to terminate execution.
  */
-int lsh_exit(char **args)
+int lsh_ex(char **args)
 {
 	(void)args;
 	free(args);
@@ -79,11 +78,11 @@ int lsh_exit(char **args)
 }
 
 /**
- * lsh_ctrld - builtin to handle "^D" call
+ * lsh_ctrD -  handle "^D" call
  * @args: List of args.  Not examined.
  * Return: Always returns 0, to terminate execution.
  */
-int lsh_ctrld(char **args)
+int lsh_ctrD(char **args)
 {
 	(void)args;
 	free(args);
@@ -110,10 +109,10 @@ int _fork_fun(char **arg, char **av, char **env, char *lineptr, int np, int c)
 
 	if (arg[0] == NULL)
 		return (1);
-	for (i = 0; i < lsh_num_builtins(); i++)
+	for (i = 0; i < lsh_num_builtin(); i++)
 	{
-		if (_strcmp(arg[0], builtin_str[i]) == 0)
-			return (builtin_func[i](arg));
+		if (_strcmp(arg[0], builtin_st[i]) == 0)
+			return (builtin_function[i](arg));
 	}
 	child = fork();
 	if (child == 0)

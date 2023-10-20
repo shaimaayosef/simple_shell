@@ -8,14 +8,14 @@
  *
  */
 
-void _getenv(char **env)
+void _geteve(char **eve)
 {
-	size_t run = 0;
+	size_t play = 0;
 
-	while (env[run])
+	while (eve[play])
 	{
-		write(STDOUT_FILENO, env[run], _strlen(env[run]));
+		write(STDOUT_FILENO, eve[play], _strlen(eve[play]));
 		write(STDOUT_FILENO, "\n", 1);
-		run++;
+		play++;
 	}
 }

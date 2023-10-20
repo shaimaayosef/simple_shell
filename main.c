@@ -8,7 +8,7 @@
 * command-line arguments `ac` and `argv`.
 * Return: 0 on success.
 */
-int main(int ac, char **av, char **env)
+int main(int ac, char **av, char **eve)
 {
 	int pathValue = 0, status = 0, is_path = 0;
 	char *line = NULL,  **commands = NULL;
@@ -25,12 +25,12 @@ int main(int ac, char **av, char **env)
 			commands = tokenize(line);/** tokeut*/
 			if (!commands)
 				free(line);
-			if (!_strcmp(commands[0], "env"))/**check env*/
-				_getenv(env);
+			if (!_strcmp(commands[0], "eve"))
+				_geteve(eve);
 			else
 			{
-				is_path = _values_path(&commands[0], env);
-				status = _fork_fun(commands, av, env, line, pathValue, is_path);
+				is_path = _values_path(&commands[0], eve);
+				status = _fork_fun(commands, av, eve, line, pathValue, is_path);
 					if (status == 200)
 					{
 						free(line);
