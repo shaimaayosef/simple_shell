@@ -2,9 +2,8 @@
 
 
 /**
- * _getenv - ptr of stadnder command
- *
- * @env: envi
+ * _geteve - ptr of stadnder command
+ * @eve: eve
  *
  */
 
