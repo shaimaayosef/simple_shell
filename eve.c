@@ -2,19 +2,20 @@
 
 
 /**
- * _geteve - ptr of stadnder command
- * @eve: eve
+ * _getenv - standard output
+ *
+ * @env: envero
  *
  */
 
-void _geteve(char **eve)
+void _getenv(char **env)
 {
-	size_t play = 0;
+	size_t run = 0;
 
-	while (eve[play])
+	while (env[run])
 	{
-		write(STDOUT_FILENO, eve[play], _strlen(eve[play]));
+		write(STDOUT_FILENO, env[run], _strlen(env[run]));
 		write(STDOUT_FILENO, "\n", 1);
-		play++;
+		run++;
 	}
 }
